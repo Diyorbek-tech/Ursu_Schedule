@@ -1,0 +1,44 @@
+<!doctype html>
+{% load static%}
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Ursu | Schedule</title>
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="{% static 'img/logo.png'%}" width="50" height="50" class="d-inline-block align-text-top">
+            Urganch Davlat Universiteti
+        </a>
+    </div>
+</nav>
+{%block content%}
+
+{%for i in flist%}
+<div class="container mt-6">
+    <ul class="list-group">
+        <li class="list-group-item"><a href="{% url 'kurs' i.id %}">{{i.name}}</a></li>
+    </ul>
+</div>
+
+{%endfor%}
+
+{% endblock content %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+</body>
+</html>

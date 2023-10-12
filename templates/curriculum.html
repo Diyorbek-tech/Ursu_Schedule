@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{%extends 'index.html'%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{%block content%}
+
+{% for i in curriculum_list%}
+<div class="container mt-6">
+    <ul class="list-group">
+        <li class="list-group-item"><a href="{% url 'schedule' dep year i.id %}">{{i.name}}</a></li>
+    </ul>
+</div>
+
+
+{%endfor%}
+
+{%endblock content %}
+</body>
+</html>

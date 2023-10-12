@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{%extends 'index.html'%}
+<html lang="en">
+<head>
+
+</head>
+<body>
+{%block content%}
+
+{% for i in kurslar%}
+
+<div class="container mt-6">
+    <ul class="list-group">
+        <li class="list-group-item"><a href="{% url 'curriculum' id i %}">{{i}}-Kurs</a></li>
+    </ul>
+</div>
+
+{%endfor%}
+
+{%endblock content %}
+
+</body>
+</html>
