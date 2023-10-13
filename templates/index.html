@@ -1,44 +1,179 @@
 <!doctype html>
 {% load static%}
 <html lang="en">
-<head>
 
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<head>
     <meta charset="utf-8">
+    <link rel="icon" href="{% static 'img/favicon.ico'%}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <title>Ursu | Schedule</title>
+
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&amp;display=swap" rel="stylesheet">
+
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <link href="{% static 'css/bootstrap-icons.css'%}" rel="stylesheet">
+
+    <link href="{% static 'css/templatemo-festava-live.css'%}" rel="stylesheet">
+
+    <!--
+
+
+
+-->
 </head>
+
 <body>
-<nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="{% static 'img/logo.png'%}" width="50" height="50" class="d-inline-block align-text-top">
-            Urganch Davlat Universiteti
-        </a>
-    </div>
-</nav>
-{%block content%}
 
-{%for i in flist%}
-<div class="container mt-6">
-    <ul class="list-group">
-        <li class="list-group-item"><a href="{% url 'kurs' i.id %}">{{i.name}}</a></li>
-    </ul>
-</div>
+<main>
 
-{%endfor%}
+    <header class="site-header">s
+        <div class="container">
+            <div class="row">
 
-{% endblock content %}
+                <div class="col-lg-12 col-12 d-flex flex-wrap">
+                    <p class="d-flex me-4 mb-0">
+                        <img src="{% static 'img/logo.png'%}"width="32" height="32">
+                        <strong class="text-white">Urganch Davlat Universiteti</strong>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    {%block content%}
+    <!--    <nav class="navbar navbar-expand-lg">-->
+    <!--        <div class="container">-->
+    <!--            <a class="navbar-brand" href="index-2.html">-->
+    <!--                Urganch Davlat Universiteti-->
+    <!--            </a>-->
+
+    <!--        </div>-->
+    <!--    </nav>-->
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <section class="hero-section" id="section_1">
+        <div class="section-overlay"></div>
 
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="row">
+
+                <div class="col-12 mt-auto mb-5 text-center">
+                    <small>Urganch Davlat Universiteti</small>
+
+                    <h1 class="text-white mb-5">Dars Jadvali</h1>
+
+                    <a class="btn custom-btn smoothscroll" href="{% url 'faculties'%}">Boshlash</a>
+                </div>
+
+                <div class="col-lg-12 col-12 mt-auto d-flex flex-column flex-lg-row text-center">
+                    <div class="date-wrap">
+                        <h5 class="text-white">
+                            <i class="custom-icon bi-calendar me-2"></i>
+                            {{date}}
+                        </h5>
+                    </div>
+
+                    <div class="location-wrap mx-auto py-3 py-lg-0">
+                        <h5 class="text-white">
+                            <i class="custom-icon bi-geo-alt me-2"></i>
+                            Hamid Olimjon ko‘chasi, 14-uy, Urganch Shahar
+                        </h5>
+                    </div>
+
+                    <div class="social-share">
+                        <ul class="social-icon d-flex align-items-center justify-content-center">
+                            <span class="text-white me-3">Share:</span>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
+                                    <span class="bi-facebook"></span>
+                                </a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
+                                    <span class="bi-twitter"></span>
+                                </a>
+                            </li>
+
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
+                                    <span class="bi-instagram"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="video-wrap">
+            <video autoplay="" loop="" muted="" class="custom-video" poster="#">
+                <source src="{% static 'video/Dron.mp4'%}" type="video/mp4">
+
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    {%endblock content%}
+
+
+</main>
+
+
+<!--<footer class="site-footer">-->
+
+
+<!--    <div class="site-footer-bottom">-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+
+<!--                <div class="col-lg-3 col-12 mt-5">-->
+<!--                    <p class="copyright-text">Copyright © 2036 Festava Live Company</p>-->
+<!--                    <p class="copyright-text">Distributed by: <a href="https://themewagon.com/">ThemeWagon</a></p>-->
+<!--                </div>-->
+
+<!--                <div class="col-lg-8 col-12 mt-lg-5">-->
+<!--                    <ul class="site-footer-links">-->
+<!--                        <li class="site-footer-link-item">-->
+<!--                            <a href="#" class="site-footer-link">Terms &amp; Conditions</a>-->
+<!--                        </li>-->
+
+<!--                        <li class="site-footer-link-item">-->
+<!--                            <a href="#" class="site-footer-link">Privacy Policy</a>-->
+<!--                        </li>-->
+
+<!--                        <li class="site-footer-link-item">-->
+<!--                            <a href="#" class="site-footer-link">Your Feedback</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</footer>-->
+
+
+<script src="{% static 'js/jquery.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
+<script src="{% static 'js/jquery.sticky.js'%}"></script>
+<script src="{% static 'js/click-scroll.js'%}"></script>
+<script src="{% static 'js/custom.js'%}"></script>
 
 </body>
+
+
 </html>

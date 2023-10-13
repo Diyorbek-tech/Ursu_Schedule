@@ -7,7 +7,7 @@ from datetime import datetime
 # Create your views here.
 
 
-def homeview(request):
+def facultiesview(request):
     Faculties = []
     url = f"https://student.urdu.uz/rest/v1/data/department-list/?_structure_type=11"
 
@@ -20,16 +20,26 @@ def homeview(request):
     response = requests.request("GET", url, headers=headers, data=payload)
     pageCount = response.json()['data']['pagination']['pageCount']
     for i in response.json()["data"]["items"]:
-        if i['id'] not in [77,8,7,6]:
+        if i['id'] not in [77, 8, 7, 6]:
             Faculties.append(i)
 
-    return render(request, 'index.html', {"flist": Faculties})
+    return render(request, 'Faculties.html', {"flist": Faculties})
+
+
+def homeview(request):
+    context = {
+        'date': datetime.now().strftime("%d-%m-%Y"),
+    }
+    return render(request, 'index.html', context)
 
 
 def coursesview(request, parent):
+    kurslar = [1, 2, 3, 4, 5]
+    if parent == 76:
+        kurslar = [1, 2]
     context = {
         'id': parent,
-        "kurslar": [1, 2, 3, 4],
+        "kurslar": kurslar,
     }
     return render(request, 'courses.html', context)
 
@@ -55,7 +65,7 @@ def curriculumview(request, deportment, year):
             groups.append(i)
 
     context = {
-        'year': ye,
+        'year': year,
         'dep': deportment,
         "curriculum_list": groups
     }
@@ -64,8 +74,8 @@ def curriculumview(request, deportment, year):
 
 
 def scheduleview(request, deportment, year, group):
-    print(deportment,year,group)
     schedule_list = []
+    date_list=[]
     today = datetime.now()
     m = today.day - today.weekday()
     monday = datetime.strptime(str(today.replace(day=m, hour=5, minute=0, microsecond=0, second=0)),
@@ -86,7 +96,7 @@ def scheduleview(request, deportment, year, group):
     response = response.json()['data']['items']
 
     lesson_day_by = []
-    print(response)
+    datetime_obj=""
     try:
 
         lesson_date = response[0]['lesson_date']
@@ -94,24 +104,28 @@ def scheduleview(request, deportment, year, group):
         print(str(e))
     for i in response:
         print(i['lesson_date'])
+
+        datetime_obj = datetime.fromtimestamp(i['lesson_date']).strftime('%Y-%m-%d')
+
+
         if i['lesson_date'] != lesson_date:
             schedule_list.append(lesson_day_by.copy())
             lesson_day_by.clear()
+            date_list.append(datetime_obj)
         lesson_day_by.append(i)
 
-        lesson_date=i['lesson_date']
+        lesson_date = i['lesson_date']
     else:
         schedule_list.append(lesson_day_by.copy())
+        date_list.append(datetime_obj)
 
-
-
-    print(len(schedule_list))
+    print(date_list)
 
     context = {
+        "date_list": date_list,
         "schedule_list": schedule_list
     }
 
     return render(request, 'schedule.html', context)
-
 
 #    filterlar    id:   77,8,7,6

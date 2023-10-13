@@ -8,12 +8,18 @@
 {%block content%}
 
 {% for i in kurslar%}
-
-<div class="container mt-6">
-    <ul class="list-group">
-        <li class="list-group-item"><a href="{% url 'curriculum' id i %}">{{i}}-Kurs</a></li>
-    </ul>
+<div class="about-text-info shadow-lg d-flex">
+    <div class="ms-4">
+        <h3><a href="{% url 'curriculum' id i %}">{{i}}-Kurs</a></h3>
+    </div>
 </div>
+
+
+<!--<div class="container mt-6">-->
+<!--    <ul class="list-group">-->
+<!--        <li class="list-group-item"><a href="{% url 'curriculum' id i %}">{{i}}-Kurs</a></li>-->
+<!--    </ul>-->
+<!--</div>-->
 
 {%endfor%}
 

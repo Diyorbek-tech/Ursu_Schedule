@@ -102,16 +102,27 @@ import requests
 
 #
 
+#
+# from datetime import datetime
+#
+# today = datetime.now()
+# m=today.day-today.weekday()
+# monday = datetime.strptime(str(today.replace(day=m,hour=5,minute=0,microsecond=0,second=0)), "%Y-%m-%d %H:%M:%S").timestamp()
+# s=m+5
+# saturday=datetime.strptime(str(today.replace(day=s,hour=5,minute=0,microsecond=0,second=0)), "%Y-%m-%d %H:%M:%S").timestamp()
+#
+# print(int(monday),int(saturday))
+# print('1696809600')
 
 from datetime import datetime
 
-today = datetime.now()
-m=today.day-today.weekday()
-monday = datetime.strptime(str(today.replace(day=m,hour=5,minute=0,microsecond=0,second=0)), "%Y-%m-%d %H:%M:%S").timestamp()
-s=m+5
-saturday=datetime.strptime(str(today.replace(day=s,hour=5,minute=0,microsecond=0,second=0)), "%Y-%m-%d %H:%M:%S").timestamp()
+# Unix timestamp (in seconds)
+unix_timestamp = 1634082053  # Replace with your timestamp
 
-print(int(monday),int(saturday))
-print('1696809600')
+# Convert Unix timestamp to a datetime object
+dt_object = datetime.fromtimestamp(unix_timestamp)
 
+# Format the datetime object as a string
+human_date = dt_object.strftime('%Y-%m-%d %H:%M:%S')  # Adjust the format as needed
 
+print(human_date)
