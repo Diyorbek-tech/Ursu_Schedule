@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {%extends 'index.html'%}
+{% load group_filter %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +16,7 @@
         <div class="row">
 
             <div class="col-lg-8 col-16 mx-auto w-100">
-                <h2 class="text-center mb-4">Dasr jadvali bilan tanishib chiqing!</h2>
+                <h2 class="text-center mb-4" style="color: #3f477b;">Dars jadvali bilan tanishib chiqing!</h2>
 
                 <nav class="d-flex justify-content-center">
                     <div class="nav nav-tabs align-items-baseline justify-content-center" id="nav-tab"
@@ -33,63 +34,192 @@
                         </button>
                     </div>
                 </nav>
-
+                <!--{{schedule_list}}-->
                 <div class="tab-content shadow-lg mt-5 " id="nav-tabContent">
 
                     <div class="tab-pane fade show active" id="nav-ContactForm" role="tabpanel"
                          aria-labelledby="nav-ContactForm-tab">
                         {% for j in schedule_list%}
+                        {% if j|get_week_day|slice:"1" == "1"%}
+                        <div class="row item mb-4">
 
+                            <div class="col-12 col-md-1 header schedule-table py-4 d-flex align-items-center justify-content-center"
+                                 style="background-color:#99a0d2;">
+                                <h5 class="m-0 writing-mode" style="color: #3f477b;">{{j|get_week_day|slice:"1:"}}</h5>
+                            </div>
 
+                            <div class="col-12 col-md-11 table-responsive">
+                                <table class="schedule-table table table-light"
+                                       style="width: 100%; margin: 0 auto;">
+                                    <thead>
+                                    <tr>
+                                        <th style="background-color:#3f477b; color: white;" scope="col">#</th>
+                                        <th style="background-color:#3f477b; color: white;" scope="col">Kirish</th>
+                                        <th style="background-color:#3f477b; color: white;" scope="col">Chiqish</th>
+                                        <th style="background-color:#3f477b; color: white;" scope="col">Fan nomi</th>
+                                        <th style="background-color:#3f477b; color: white;" scope="col">Xona</th>
+                                        <th style="background-color:#3f477b; color: white;" scope="col">Fan turi</th>
+                                        <th style="background-color:#3f477b; color: white;" scope="col">O'qituvchi</th>
 
-                        <div class="container mt-4">
-                            <table class="schedule-table table table-light table-hover caption-top"
-                                   style="width: 100%; margin: 0 auto;">
+                                    </tr>
+                                    </thead>
+                                    {% for h in j%}
+                                    <tbody>
+                                    <tr>
+                                        <th style="background-color:#99a0d2; color: white;" scope="row">
+                                            {{h.lessonPair.name}}
+                                        </th>
+                                        <td style="background-color:#99a0d2; color: white;" class="text-start">
+                                            {{h.lessonPair.start_time}}
+                                        </td>
+                                        <td style="background-color:#99a0d2; color: white;" class="text-start">
+                                            {{h.lessonPair.end_time}}
+                                        </td>
+                                        <td style="background-color:#99a0d2; color: white;" class="text-start">
+                                            {{h.subject.name}}
+                                        </td>
+                                        <td style="background-color:#99a0d2; color: white;" class="text-start">
+                                            {{h.auditorium.name}}
+                                        </td>
+                                        <td style="background-color:#99a0d2; color: white;" class="text-start">
+                                            {{h.trainingType.name}}
+                                        </td>
+                                        <td style="background-color:#99a0d2; color: white;" class="text-start">
+                                            {{h.employee.name}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
 
+                                    {%endfor%}
 
-
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Kirish</th>
-                                    <th scope="col">Chiqish</th>
-                                    <th scope="col">Fan nomi</th>
-                                    <th scope="col">Xona</th>
-                                    <th scope="col">Fan turi</th>
-                                    <th scope="col">O'qituvchi</th>
-
-                                </tr>
-                                </thead>
-
-                                {% for h in j%}
-
-                                <tbody>
-                                <tr>
-                                    <th scope="row">{{h.lessonPair.name}}</th>
-                                    <td class="text-start">{{h.lessonPair.start_time}}</td>
-                                    <td class="text-start">{{h.lessonPair.end_time}}</td>
-                                    <td class="text-start">{{h.subject.name}}</td>
-                                    <td class="text-start">{{h.auditorium.name}}</td>
-                                    <td class="text-start">{{h.trainingType.name}}</td>
-                                    <td class="text-start">{{h.employee.name}}</td>
-
-                                </tr>
-                                </tbody>
-
-                                {%endfor%}
-
-                            </table>
+                                </table>
+                            </div>
                         </div>
+                        {%else%}
+                        <div class="row item mb-4">
+                            <div class="col-12 col-md-1 header py-4 d-flex align-items-center justify-content-center">
+                                <h5 class="m-0 writing-mode" style="color: #3f477b;">{{j|get_week_day}}</h5></div>
+                            <div class="col-12 col-md-11 table-responsive">
+                                <table class="schedule-table table table-light caption-top"
+                                       style="width: 100%; margin: 0 auto;">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Kirish</th>
+                                        <th scope="col">Chiqish</th>
+                                        <th scope="col">Fan nomi</th>
+                                        <th scope="col">Xona</th>
+                                        <th scope="col">Fan turi</th>
+                                        <th scope="col">O'qituvchi</th>
+                                    </tr>
+                                    </thead>
+                                    {% for h in j%}
+                                    <tbody>
+                                    <tr>
 
+                                        <th scope="row">{{h.lessonPair.name}}</th>
+                                        <td class="text-start">{{h.lessonPair.start_time}}</td>
+                                        <td class="text-start">{{h.lessonPair.end_time}}</td>
+                                        <td class="text-start">{{h.subject.name}}</td>
+                                        <td class="text-start">{{h.auditorium.name}}</td>
+                                        <td class="text-start">{{h.trainingType.name}}</td>
+                                        <td class="text-start">{{h.employee.name}}</td>
 
+                                    </tr>
+                                    </tbody>
+
+                                    {%endfor%}
+
+                                </table>
+                            </div>
+                        </div>
+                        {%endif%}
                         {%endfor%}
-
-
                     </div>
 
                     <div class="tab-pane fade" id="nav-ContactMap" role="tabpanel"
                          aria-labelledby="nav-ContactMap-tab">
+                        {% for j in schedule_next_list%}
+                        {% if j|get_week_day|slice:"1" == "1"%}
+                        <div class="row item mb-4">
 
+                            <div class="col-12 col-md-1 header schedule-table py-4 d-flex align-items-center justify-content-center">
+                                <h5 class="m-0 writing-mode" style="color: #3f477b;">{{j|get_week_day|slice:"1:"}}</h5>
+                            </div>
+
+                            <div class="col-12 col-md-11 table-responsive">
+                                <table class="schedule-table table table-light"
+                                       style="width: 100%; margin: 0 auto;background-color:#99a0d2">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Kirish</th>
+                                        <th scope="col">Chiqish</th>
+                                        <th scope="col">Fan nomi</th>
+                                        <th scope="col">Xona</th>
+                                        <th scope="col">Fan turi</th>
+                                        <th scope="col">O'qituvchi</th>
+
+                                    </tr>
+                                    </thead>
+                                    {% for h in j%}
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">{{h.lessonPair.name}}</th>
+                                        <td class="text-start">{{h.lessonPair.start_time}}</td>
+                                        <td class="text-start">{{h.lessonPair.end_time}}</td>
+                                        <td class="text-start">{{h.subject.name}}</td>
+                                        <td class="text-start">{{h.auditorium.name}}</td>
+                                        <td class="text-start">{{h.trainingType.name}}</td>
+                                        <td class="text-start">{{h.employee.name}}</td>
+                                    </tr>
+                                    </tbody>
+
+                                    {%endfor%}
+
+                                </table>
+                            </div>
+                        </div>
+                        {%else%}
+                        <div class="row item mb-4">
+                            <div class="col-12 col-md-1 header py-4 d-flex align-items-center justify-content-center">
+                                <h5 class="m-0 writing-mode" style="color: #3f477b;">{{j|get_week_day}}</h5></div>
+                            <div class="col-12 col-md-11 table-responsive">
+                                <table class="schedule-table table table-light caption-top"
+                                       style="width: 100%; margin: 0 auto;">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Kirish</th>
+                                        <th scope="col">Chiqish</th>
+                                        <th scope="col">Fan nomi</th>
+                                        <th scope="col">Xona</th>
+                                        <th scope="col">Fan turi</th>
+                                        <th scope="col">O'qituvchi</th>
+                                    </tr>
+                                    </thead>
+                                    {% for h in j%}
+                                    <tbody>
+                                    <tr>
+
+                                        <th scope="row">{{h.lessonPair.name}}</th>
+                                        <td class="text-start">{{h.lessonPair.start_time}}</td>
+                                        <td class="text-start">{{h.lessonPair.end_time}}</td>
+                                        <td class="text-start">{{h.subject.name}}</td>
+                                        <td class="text-start">{{h.auditorium.name}}</td>
+                                        <td class="text-start">{{h.trainingType.name}}</td>
+                                        <td class="text-start">{{h.employee.name}}</td>
+
+                                    </tr>
+                                    </tbody>
+
+                                    {%endfor%}
+
+                                </table>
+                            </div>
+                        </div>
+                        {%endif%}
+                        {%endfor%}
 
                     </div>
                 </div>

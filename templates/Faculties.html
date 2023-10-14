@@ -14,7 +14,7 @@
 
 <div class="about-text-info shadow-lg d-flex">
     <div class="ms-4">
-        <h3><a href="{% url 'kurs' i.id %}">{{i.name}}</a></h3>
+        <h3><a href="{% url 'kurs' i.id %}">{{ forloop.counter }}.{{i.name}}</a></h3>
     </div>
 </div>
 

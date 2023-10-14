@@ -123,6 +123,24 @@ unix_timestamp = 1634082053  # Replace with your timestamp
 dt_object = datetime.fromtimestamp(unix_timestamp)
 
 # Format the datetime object as a string
-human_date = dt_object.strftime('%Y-%m-%d %H:%M:%S')  # Adjust the format as needed
-
+human_date = dt_object.strftime("%u")  # Adjust the format as needed
 print(human_date)
+
+#
+# deportment=2
+# year=1
+# now = datetime.datetime.now()
+# ye = now.year - year
+# if now.month >= 9 and now.month <= 12:
+#     ye = now.year - year + 1
+#
+# url = f"https://student.urdu.uz/rest/v1/data/curriculum-list/?_department={deportment}&_education_year={ye}"
+# payload = {
+# }
+# headers = {
+#     'Authorization': 'Bearer t9n6KJ9sgXhyI9A8cqXxOhuUlK6V5eHV',
+#     'Content-Type': 'application/json'
+# }
+# response = requests.request("GET", url, headers=headers, data=payload)
+# response = response.json()['data']['items']
+# print(response)

@@ -13,10 +13,10 @@ https://templatemo.com/tm-583-festava-live
 :root {
   --white-color:                  #ffffff;
   --primary-color:                #3f477b;
-  --secondary-color:              #EE5007;
+  --secondary-color:              #99a0d2;
   --section-bg-color:             #f0f8ff;
   --custom-btn-bg-color:          #EE5007;
-  --custom-btn-bg-hover-color:    #c01f27;
+  --custom-btn-bg-hover-color:    #3d85c6;
   --dark-color:                   #000000;
   --p-color:                      #717275;
   --border-color:                 #7fffd4;
@@ -44,10 +44,22 @@ https://templatemo.com/tm-583-festava-live
 }
 
 body {
+  background: url("static/img/back.jpg")
   background-color: var(--white-color);
   font-family: var(--body-font-family); 
 }
+.bg {
+  /* The image used */
+  background-image: url("static/img/back.jpg");
 
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 /*---------------------------------------
   TYPOGRAPHY               
@@ -542,15 +554,34 @@ strong {
   border: 1px solid rgba(209, 213, 219, 0.3);
 
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
-  width: 60%;
-  text-align: center;
+  justify-content: left; /* Center vertically */
+  align-items: left; /* Center horizontally */
+  width: 80%;
+  text-align: left;
 
   bottom: 0;
   right: 0;
   left: 0;
   margin: 20px auto;
+  padding: 15px;
+}
+.about-text-info1 {
+  backdrop-filter: blur(5px) saturate(180%);
+  -webkit-backdrop-filter: blur(5px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: var(--border-radius-medium);
+  border: 1px solid rgba(209, 213, 219, 0.3);
+
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  width: 100%;
+  text-align: center;
+
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 15px auto;
   padding: 15px;
 }
 
@@ -690,7 +721,7 @@ strong {
 }
 
 .schedule-table thead th {
-  border-right: 1px solid #c7460a;
+
   border-bottom-color: transparent;
 }
 
@@ -1029,3 +1060,39 @@ strong {
   }
 }
 
+ table th {
+    color: var(--primary-color);
+     font-size: 18px;
+  }
+
+
+ table td {
+    color: var(--primary-color);
+    font-size: 18px;
+  }
+
+
+  .rotate-div {
+    width: 30px; /* Element kengligi */
+    height: 120px; /* Element balandligi */
+    writing-mode: vertical-rl; /* Matnni vertikal ravishda yozish */
+    transform: rotate(-180deg); /* Matnni chap tomondan o'ng tomon yozish */
+  }
+  .writing-mode {
+    writing-mode: vertical-rl;
+    transform: rotate(-180deg);
+
+}
+
+.bg {
+  /* The image used */
+  background-image: url("static/img/back.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
