@@ -6,22 +6,38 @@
 </head>
 <body>
 {%block content%}
+<section class="contact-section section-padding" id="section_6">
+    <div class="container">
+        <div class="row">
 
-{% for i in kurslar%}
-<div class="about-text-info shadow-lg d-flex">
-    <div class="ms-4">
-        <h3><a href="{% url 'curriculum' id i %}">{{i}}-Kurs</a></h3>
+            <div class="col-lg-8 col-16 mx-auto w-100">
+<!--                <a href="javascript:history.back()" class="back-button">-->
+<!--                    <span class="icon">&larr;</span> <span class="text">Orqaga</span>-->
+<!--                </a>-->
+<!--                <br><br>-->
+                <a href="javascript:history.go(-2)" class="back-button">
+                    <span class="text">Bosh sahifa/</span>
+                </a>
+                <a href="javascript:history.back()" class="back-button">
+                    <span class="text">Fakultetlar/</span>
+                </a>
+                <h2 class="text-center mb-4" style="color: #3f477b;">Kursni tanlang!</h2>
+
+                {% for i in kurslar%}
+                <div class="about-text-info shadow-lg d-flex">
+
+                    <div class="ms-4">
+                        <h3><a href="{% url 'curriculum' id i %}">{{i}}-Kurs</a></h3>
+                    </div>
+                </div>
+
+
+                {%endfor%}
+
+            </div>
+        </div>
     </div>
-</div>
-
-
-<!--<div class="container mt-6">-->
-<!--    <ul class="list-group">-->
-<!--        <li class="list-group-item"><a href="{% url 'curriculum' id i %}">{{i}}-Kurs</a></li>-->
-<!--    </ul>-->
-<!--</div>-->
-
-{%endfor%}
+</section>
 
 {%endblock content %}
 

@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 # Create your views here.
-
+from decouple import config
 
 def facultiesview(request):
     Faculties = []
@@ -14,7 +14,7 @@ def facultiesview(request):
     payload = {
     }
     headers = {
-        'Authorization': 'Bearer t9n6KJ9sgXhyI9A8cqXxOhuUlK6V5eHV',
+        'Authorization': config('API_KEY'),
         'Content-Type': 'application/json'
     }
     response = requests.request("GET", url, headers=headers, data=payload)
@@ -55,7 +55,7 @@ def curriculumview(request, deportment, year):
     payload = {
     }
     headers = {
-        'Authorization': 'Bearer t9n6KJ9sgXhyI9A8cqXxOhuUlK6V5eHV',
+        'Authorization': config('API_KEY'),
         'Content-Type': 'application/json'
     }
     response = requests.request("GET", url, headers=headers, data=payload)
@@ -71,8 +71,8 @@ def curriculumview(request, deportment, year):
     context = {
         'year': year,
         'dep': deportment,
-        "curriculum_list": reversed(response),
-        "groups_list": reversed(response2),
+        "curriculum_list": response,
+        "groups_list": response2,
 
     }
 
@@ -125,7 +125,7 @@ def scheduleview(request, deportment, year, group):
     payload = {
     }
     headers = {
-        'Authorization': 'Bearer t9n6KJ9sgXhyI9A8cqXxOhuUlK6V5eHV',
+        'Authorization': config('API_KEY'),
         'Content-Type': 'application/json'
     }
     response = requests.request("GET", url, headers=headers, data=payload)

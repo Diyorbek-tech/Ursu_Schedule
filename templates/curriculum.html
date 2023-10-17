@@ -9,32 +9,208 @@
 <body>
 {%block content%}
 
-<h2 class="text-center mb-5 mt-5" style="color: #3f477b;">Yo'nalish va guruhni tanlang!</h2>
+<section class="contact-section section-padding" id="section_6">
+    <div class="container">
+        <div class="row">
 
-<div class="accordion" id="collapseGroup">
+            <div class="col-lg-8 col-16 mx-auto w-100">
 
-    {% for i in curriculum_list %}
-    <div class="about-text-info shadow-lg d-flex">
-        <div class="card-header" id="section{{ forloop.counter }}">
-            <h3 class="mb-0">
-                <a href="#collapse{{ forloop.counter }}" data-bs-toggle="collapse">
-                    {{ i.specialty.name }} {{i.educationForm.name}}
+                <a href="javascript:history.go(-3)" class="back-button">
+                    <span class="text">Bosh sahifa/</span>
                 </a>
-            </h3>
-        </div>
-        <div id="collapse{{ forloop.counter }}" class="collapse" data-bs-parent="#collapseGroup">
-            {% for h in i.id|get_group:groups_list %}
-            <div class="about-text-info1 shadow-lg d-flex">
-                <div class="ms-4">
-                    <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                <a href="javascript:history.go(-2)" class="back-button">
+                    <span class="text">Fakultetlar/</span>
+                </a>
+                <a href="javascript:history.back()" class="back-button">
+                    <span class="text">Kurs/</span>
+                </a>
+
+                <h2 class="text-center mb-4" style="color: #3f477b;">Yo'nalish va guruhni tanlang!</h2>
+
+                <nav class="d-flex justify-content-center">
+                    <div class="nav nav-tabs align-items-baseline justify-content-center" id="nav-tab"
+                         role="tablist">
+
+                        <button class="nav-link active" id="kunduzgi" data-bs-toggle="tab"
+                                data-bs-target="#nav-kunduzgi" type="button" role="tab"
+                                aria-controls="nav-kunduzgi" aria-selected="false">
+                            <h5>Kunduzgi</h5>
+                        </button>
+                        <button class="nav-link" id="sirtqi" data-bs-toggle="tab"
+                                data-bs-target="#nav-sirtqi" type="button" role="tab"
+                                aria-controls="nav-sirtqi" aria-selected="false">
+                            <h5>Sirtqi</h5>
+                        </button>
+                        <button class="nav-link" id="masofaviy" data-bs-toggle="tab"
+                                data-bs-target="#nav-masofaviy" type="button" role="tab"
+                                aria-controls="nav-masofaviy" aria-selected="false">
+                            <h5>Masofaviy</h5>
+                        </button>
+                        <button class="nav-link" id="ikkinchioliy" data-bs-toggle="tab"
+                                data-bs-target="#nav-ikkinchioliy" type="button" role="tab"
+                                aria-controls="nav-ikkinchioliy" aria-selected="false">
+                            <h5>Ikkinchi Oliy</h5>
+                        </button>
+                        <button class="nav-link" id="qoshma" data-bs-toggle="tab"
+                                data-bs-target="#nav-qoshma" type="button" role="tab"
+                                aria-controls="nav-qoshma" aria-selected="false">
+                            <h5>Qo'shma</h5>
+                        </button>
+
+                    </div>
+                </nav>
+                <!--{{schedule_list}}-->
+
+                <div class="tab-content shadow-lg mt-5 " id="nav-tabContent">
+
+                    <div class="tab-pane fade show active" id="nav-kunduzgi" role="tabpanel"
+                         aria-labelledby="kunduzgi">
+                        <div class="accordion" id="collapseGroup">
+
+                            {% for i in 11|get_curriculum:curriculum_list %}
+                            <div class="about-text-info shadow-lg d-flex">
+                                <div class="card-header" id="kunduzgi{{ forloop.counter }}">
+                                    <h3 class="mb-0">
+                                        <a href="#kunduzgi1{{ forloop.counter }}" data-bs-toggle="collapse">
+                                            {{ i.specialty.name }}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="kunduzgi1{{ forloop.counter }}" class="collapse"
+                                     data-bs-parent="#collapseGroup">
+                                    {% for h in i.id|get_group:groups_list %}
+                                    <div class="about-text-info1 shadow-lg d-flex">
+                                        <div class="ms-4">
+                                            <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show" id="nav-sirtqi" role="tabpanel"
+                         aria-labelledby="kunduzgi">
+                        <div class="accordion" id="collapseGroup1">
+
+                            {% for i in 13|get_curriculum:curriculum_list %}
+                            <div class="about-text-info shadow-lg d-flex">
+                                <div class="card-header" id="sirtqi{{ forloop.counter }}">
+                                    <h3 class="mb-0">
+                                        <a href="#sirtqi1{{ forloop.counter }}" data-bs-toggle="collapse">
+                                            {{ i.specialty.name }}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="sirtqi1{{ forloop.counter }}" class="collapse"
+                                     data-bs-parent="#collapseGroup1">
+                                    {% for h in i.id|get_group:groups_list %}
+                                    <div class="about-text-info1 shadow-lg d-flex">
+                                        <div class="ms-4">
+                                            <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show" id="nav-masofaviy" role="tabpanel"
+                         aria-labelledby="masofaviy">
+                        <div class="accordion" id="collapseGroup2">
+
+                            {% for i in 16|get_curriculum:curriculum_list %}
+                            <div class="about-text-info shadow-lg d-flex">
+                                <div class="card-header" id="masofaviy{{ forloop.counter }}">
+                                    <h3 class="mb-0">
+                                        <a href="#masofaviy1{{ forloop.counter }}" data-bs-toggle="collapse">
+                                            {{ i.specialty.name }}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="masofaviy1{{ forloop.counter }}" class="collapse"
+                                     data-bs-parent="#collapseGroup2">
+                                    {% for h in i.id|get_group:groups_list %}
+                                    <div class="about-text-info1 shadow-lg d-flex">
+                                        <div class="ms-4">
+                                            <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show" id="nav-ikkinchioliy" role="tabpanel"
+                         aria-labelledby="ikkinchioliy">
+                        <div class="accordion" id="collapseGroup3">
+
+                            {% for i in 15|get_curriculum:curriculum_list %}
+                            <div class="about-text-info shadow-lg d-flex">
+                                <div class="card-header" id="ikkinchioliy{{ forloop.counter }}">
+                                    <h3 class="mb-0">
+                                        <a href="#ikkinchioliy1{{ forloop.counter }}" data-bs-toggle="collapse">
+                                            {{ i.specialty.name }}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="ikkinchioliy1{{ forloop.counter }}" class="collapse"
+                                     data-bs-parent="#collapseGroup3">
+                                    {% for h in i.id|get_group:groups_list %}
+                                    <div class="about-text-info1 shadow-lg d-flex">
+                                        <div class="ms-4">
+                                            <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show" id="nav-qoshma" role="tabpanel"
+                         aria-labelledby="qoshma">
+                        <div class="accordion" id="collapseGroup4">
+
+                            {% for i in 17|get_curriculum:curriculum_list %}
+                            <div class="about-text-info shadow-lg d-flex">
+                                <div class="card-header" id="qoshma{{ forloop.counter }}">
+                                    <h3 class="mb-0">
+                                        <a href="#qoshma1{{ forloop.counter }}" data-bs-toggle="collapse">
+                                            {{ i.specialty.name }}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div id="qoshma1{{ forloop.counter }}" class="collapse"
+                                     data-bs-parent="#collapseGroup4">
+                                    {% for h in i.id|get_group:groups_list %}
+                                    <div class="about-text-info1 shadow-lg d-flex">
+                                        <div class="ms-4">
+                                            <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
-            {% endfor %}
         </div>
     </div>
-    {% endfor %}
-</div>
+</section>
 
 
 {%endblock content %}

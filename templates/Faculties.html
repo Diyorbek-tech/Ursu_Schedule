@@ -9,23 +9,36 @@
 <body>
 
 {%block content%}
+<section class="contact-section section-padding" id="section_6">
+    <div class="container">
+        <div class="row">
 
-{%for i in flist%}
+            <div class="col-lg-8 col-16 mx-auto w-100">
 
-<div class="about-text-info shadow-lg d-flex">
-    <div class="ms-4">
-        <h3><a href="{% url 'kurs' i.id %}">{{ forloop.counter }}.{{i.name}}</a></h3>
+                  <a href="javascript:history.back()" class="back-button">
+                     <span class="text">Bosh sahifa/</span>
+                </a>
+
+                <h2 class="text-center mb-4" style="color: #3f477b;">Fakultetni tanlang!</h2>
+
+
+                {%for i in flist%}
+
+                <div class="about-text-info shadow-lg d-flex">
+                    <div class="ms-4">
+                        {%if forloop.counter == 10%}
+                        <h3><a href="{% url 'kurs' i.id %}">{{ forloop.counter }}.{{i.name|upper}}</a></h3>
+                        {%else%}
+                        <h3><a href="{% url 'kurs' i.id %}">{{ forloop.counter }}.{{i.name|upper|slice:-9}}</a></h3>
+                          {%endif%}
+                    </div>
+                </div>
+
+                {%endfor%}
+            </div>
+        </div>
     </div>
-</div>
-
-<!--<div class="container mt-6">-->
-<!--    <ul class="list-group">-->
-<!--        <li class="list-group-item"><a href="{% url 'kurs' i.id %}">{{i.name}}</a></li>-->
-<!--    </ul>-->
-<!--</div>-->
-
-{%endfor%}
-
+</section>
 {% endblock content %}
 
 
