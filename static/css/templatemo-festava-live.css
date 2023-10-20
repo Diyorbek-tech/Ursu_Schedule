@@ -690,6 +690,7 @@ strong {
 }
 .table-responsive {
 	filter: drop-shadow(2px 2px 4px #606060);
+  overflow-x: hidden;
 }
 
 .schedule-table {
@@ -711,6 +712,7 @@ strong {
 .schedule-table td {
   border-bottom-color: #363a3e;
   padding: 30px;
+  font-size: 10px;
 }
 
 .schedule-table tr:last-child th,
@@ -1034,7 +1036,62 @@ strong {
     font-size: 14px;
     padding: 10px 20px;
   }
+  .writing-mode{
+    writing-mode: vertical-rl;
+    transform: rotate(-90deg)!important;
+  }
+  #nav-ContactForm > div{
+    margin-bottom: 0!important;
+  }
+  #nav-ContactForm > div >div{
+    padding: 0!important;
+  }
+#nav-ContactForm > div >div:first-child{
+  margin: 10px 0 10px 0;
+  height: 50px!important;
 }
+div.col-12.col-md-1.header.py-4.d-flex.align-items-center.justify-content-center{
+  margin: 10px 0 10px 0;
+  height: 50px!important;
+}
+div.row.item.mb-4{
+  margin-bottom: 0;
+}
+ h5{
+  font-size: 18px!important;
+}
+.text-center{
+  margin-bottom: 0.75rem!important;
+  margin-top: 0.75rem!important;
+  font-size: 24px;
+}
+.tab-content{
+  margin-top: 10px!important;
+}
+.nav-tabs{
+padding: 0;
+}
+#section_6{
+  padding: 10px;
+}
+}
+@media screen and (max-width: 651px){
+  .tab-content{
+    padding: 0;
+  }
+  #nav-ContactForm > div{
+    margin: 0;
+  }
+  .container-fluid > div > div{
+    padding: 0;
+  }
+}
+@media screen and (max-width: 563px){
+  .table-responsive {
+    overflow-x: auto!important;
+  }
+}
+
 
 @media screen and (max-width: 480px) {
   h1 {

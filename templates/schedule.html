@@ -12,7 +12,7 @@
 {%block content%}
 
 <section class="contact-section section-padding" id="section_6">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
 
             <div class="col-lg-8 col-16 mx-auto w-100">
@@ -67,8 +67,7 @@
                                     <thead>
                                     <tr>
                                         <th style="background-color:#3f477b; color: white;" scope="col">#</th>
-                                        <th style="background-color:#3f477b; color: white;" scope="col">Kirish</th>
-                                        <th style="background-color:#3f477b; color: white;" scope="col">Chiqish</th>
+                                        <th style="background-color:#3f477b; color: white;" scope="col">Vaqt</th>
                                         <th style="background-color:#3f477b; color: white;" scope="col">Fan nomi</th>
                                         <th style="background-color:#3f477b; color: white;" scope="col">Xona</th>
                                         <th style="background-color:#3f477b; color: white;" scope="col">Fan turi</th>
@@ -82,12 +81,11 @@
                                         <th style="background-color:#99a0d2; color: white;" scope="row">
                                             {{h.lessonPair.name}}
                                         </th>
+
                                         <td style="background-color:#99a0d2; color: white;" class="text-start">
-                                            {{h.lessonPair.start_time}}
+                                            {{h.lessonPair.start_time}} - {{h.lessonPair.end_time}}
                                         </td>
-                                        <td style="background-color:#99a0d2; color: white;" class="text-start">
-                                            {{h.lessonPair.end_time}}
-                                        </td>
+
                                         <td style="background-color:#99a0d2; color: white;" class="text-start">
                                             {{h.subject.name}}
                                         </td>
@@ -113,13 +111,12 @@
                             <div class="col-12 col-md-1 header py-4 d-flex align-items-center justify-content-center">
                                 <h5 class="m-0 writing-mode" style="color: #3f477b;">{{j|get_week_day}}</h5></div>
                             <div class="col-12 col-md-11 table-responsive">
-                                <table class="schedule-table table table-light caption-top"
+                                <table class="schedule-table table-hover table-striped table table-light caption-top"
                                        style="width: 100%; margin: 0 auto;">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Kirish</th>
-                                        <th scope="col">Chiqish</th>
+                                        <th scope="col">Vaqt</th>
                                         <th scope="col">Fan nomi</th>
                                         <th scope="col">Xona</th>
                                         <th scope="col">Fan turi</th>
@@ -130,9 +127,8 @@
                                     <tbody>
                                     <tr>
 
-                                        <th scope="row">{{h.lessonPair.name}}</th>
-                                        <td class="text-start">{{h.lessonPair.start_time}}</td>
-                                        <td class="text-start">{{h.lessonPair.end_time}}</td>
+                                        <th scope="row" >{{h.lessonPair.name}}</th>
+                                        <td class="text-start">{{h.lessonPair.start_time}} - {{h.lessonPair.end_time}}</td>
                                         <td class="text-start">{{h.subject.name}}</td>
                                         <td class="text-start">{{h.auditorium.name}}</td>
                                         <td class="text-start">{{h.trainingType.name}}</td>
