@@ -12,7 +12,7 @@
 {%block content%}
 
 <section class="contact-section section-padding" id="section_6">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
 
             <div class="col-lg-8 col-16 mx-auto w-100">
@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="col-12 col-md-11 table-responsive">
-                                <table class="schedule-table table table-light"
+                                <table class="schedule-table table-hover table table-light"
                                        style="width: 100%; margin: 0 auto;">
                                     <thead>
                                     <tr>
@@ -127,8 +127,9 @@
                                     <tbody>
                                     <tr>
 
-                                        <th scope="row" >{{h.lessonPair.name}}</th>
-                                        <td class="text-start">{{h.lessonPair.start_time}} - {{h.lessonPair.end_time}}</td>
+                                        <th scope="row">{{h.lessonPair.name}}</th>
+                                        <td class="text-start">{{h.lessonPair.start_time}} - {{h.lessonPair.end_time}}
+                                        </td>
                                         <td class="text-start">{{h.subject.name}}</td>
                                         <td class="text-start">{{h.auditorium.name}}</td>
                                         <td class="text-start">{{h.trainingType.name}}</td>
@@ -148,59 +149,19 @@
 
                     <div class="tab-pane fade" id="nav-ContactMap" role="tabpanel"
                          aria-labelledby="nav-ContactMap-tab">
+
                         {% for j in schedule_next_list%}
                         {% if j|get_week_day|slice:"1" == "1"%}
-                        <div class="row item mb-4">
-
-                            <div class="col-12 col-md-1 header schedule-table py-4 d-flex align-items-center justify-content-center">
-                                <h5 class="m-0 writing-mode" style="color: #3f477b;">{{j|get_week_day|slice:"1:"}}</h5>
-                            </div>
-
-                            <div class="col-12 col-md-11 table-responsive">
-                                <table class="schedule-table table table-light"
-                                       style="width: 100%; margin: 0 auto;background-color:#99a0d2">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Kirish</th>
-                                        <th scope="col">Chiqish</th>
-                                        <th scope="col">Fan nomi</th>
-                                        <th scope="col">Xona</th>
-                                        <th scope="col">Fan turi</th>
-                                        <th scope="col">O'qituvchi</th>
-
-                                    </tr>
-                                    </thead>
-                                    {% for h in j%}
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">{{h.lessonPair.name}}</th>
-                                        <td class="text-start">{{h.lessonPair.start_time}}</td>
-                                        <td class="text-start">{{h.lessonPair.end_time}}</td>
-                                        <td class="text-start">{{h.subject.name}}</td>
-                                        <td class="text-start">{{h.auditorium.name}}</td>
-                                        <td class="text-start">{{h.trainingType.name}}</td>
-                                        <td class="text-start">{{h.employee.name}}</td>
-                                    </tr>
-                                    </tbody>
-
-                                    {%endfor%}
-
-                                </table>
-                            </div>
-                        </div>
-                        {%else%}
-                        <div class="row item mb-4">
+                          <div class="row item mb-4">
                             <div class="col-12 col-md-1 header py-4 d-flex align-items-center justify-content-center">
-                                <h5 class="m-0 writing-mode" style="color: #3f477b;">{{j|get_week_day}}</h5></div>
+                                <h5 class="m-0 writing-mode" style="color: #3f477b;">{{j|get_week_day|slice:"1:"}}</h5></div>
                             <div class="col-12 col-md-11 table-responsive">
-                                <table class="schedule-table table table-light caption-top"
+                                <table class="schedule-table table-hover table-striped table table-light caption-top"
                                        style="width: 100%; margin: 0 auto;">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Kirish</th>
-                                        <th scope="col">Chiqish</th>
+                                        <th scope="col">Vaqt</th>
                                         <th scope="col">Fan nomi</th>
                                         <th scope="col">Xona</th>
                                         <th scope="col">Fan turi</th>
@@ -212,8 +173,9 @@
                                     <tr>
 
                                         <th scope="row">{{h.lessonPair.name}}</th>
-                                        <td class="text-start">{{h.lessonPair.start_time}}</td>
-                                        <td class="text-start">{{h.lessonPair.end_time}}</td>
+                                        <td class="text-start">
+                                            {{h.lessonPair.start_time}} - {{h.lessonPair.end_time}}
+                                        </td>
                                         <td class="text-start">{{h.subject.name}}</td>
                                         <td class="text-start">{{h.auditorium.name}}</td>
                                         <td class="text-start">{{h.trainingType.name}}</td>
@@ -227,10 +189,51 @@
                                 </table>
                             </div>
                         </div>
-                        {%endif%}
+                        {% else%}
+                        <div class="row item mb-4">
+                            <div class="col-12 col-md-1 header py-4 d-flex align-items-center justify-content-center">
+                                <h5 class="m-0 writing-mode" style="color: #3f477b;">{{j|get_week_day}}</h5></div>
+                            <div class="col-12 col-md-11 table-responsive">
+                                <table class="schedule-table table-hover table-striped table table-light caption-top"
+                                       style="width: 100%; margin: 0 auto;">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Vaqt</th>
+                                        <th scope="col">Fan nomi</th>
+                                        <th scope="col">Xona</th>
+                                        <th scope="col">Fan turi</th>
+                                        <th scope="col">O'qituvchi</th>
+                                    </tr>
+                                    </thead>
+                                    {% for h in j%}
+                                    <tbody>
+                                    <tr>
+
+                                        <th scope="row">{{h.lessonPair.name}}</th>
+                                        <td class="text-start">
+                                            {{h.lessonPair.start_time}} - {{h.lessonPair.end_time}}
+                                        </td>
+                                        <td class="text-start">{{h.subject.name}}</td>
+                                        <td class="text-start">{{h.auditorium.name}}</td>
+                                        <td class="text-start">{{h.trainingType.name}}</td>
+                                        <td class="text-start">{{h.employee.name}}</td>
+
+                                    </tr>
+                                    </tbody>
+
+                                    {%endfor%}
+
+                                </table>
+                            </div>
+                        </div>
+
+                        {% endif%}
+
                         {%endfor%}
 
                     </div>
+
                 </div>
             </div>
 

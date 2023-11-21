@@ -7,7 +7,7 @@
 {%block content%}
 
 <section class="contact-section section-padding" id="section_6">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
 
             <div class="col-lg-12 col-md-12 col-16 mx-auto w-100">
@@ -71,6 +71,7 @@
                                         <a href="#kunduzgi1{{ forloop.counter }}" data-bs-toggle="collapse">
                                             {{ i.specialty.name }}
                                         </a>
+
                                     </h3>
                                 </div>
                                 <div id="kunduzgi1{{ forloop.counter }}" class="collapse"
@@ -78,7 +79,15 @@
                                     {% for h in i.id|get_group:groups_list %}
                                     <div class="about-text-info1 shadow-lg d-flex">
                                         <div class="ms-4">
-                                            <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                                            <h3 class="mb-0" style="color:#3f477b ">
+                                                {{h.name}}
+                                                <a href="{% url 'schedule' dep year h.id%}" class="btn"
+                                                   style="background-color:#3f477b; color: white;font-size: 12px">Dars
+                                                    Jadvali</a>
+                                                <a href="{% url 'exams' dep year h.id%}" class="btn"
+                                                   style="background-color:#3f477b; color: white;font-size: 12px">Nazoratlar
+                                                    jadvali</a>
+                                            </h3>
                                         </div>
                                     </div>
 
@@ -106,7 +115,15 @@
                                     {% for h in i.id|get_group:groups_list %}
                                     <div class="about-text-info1 shadow-lg d-flex">
                                         <div class="ms-4">
-                                            <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                                            <h3 class="mb-0" style="color:#3f477b ">
+                                                {{h.name}}
+                                                <a href="{% url 'schedule' dep year h.id%}" class="btn"
+                                                   style="background-color:#3f477b; color: white;">Dars
+                                                    Jadvali</a>
+                                                <a href="{% url 'exams' dep year h.id%}" class="btn"
+                                                   style="background-color:#3f477b; color: white;">Nazoratlar
+                                                    jadvali</a>
+                                            </h3>
                                         </div>
                                     </div>
 
@@ -134,7 +151,15 @@
                                     {% for h in i.id|get_group:groups_list %}
                                     <div class="about-text-info1 shadow-lg d-flex">
                                         <div class="ms-4">
-                                            <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                                            <h3 class="mb-0" style="color:#3f477b ">
+                                                {{h.name}}
+                                                <a href="{% url 'schedule' dep year h.id%}" class="btn"
+                                                   style="background-color:#3f477b; color: white;">Dars
+                                                    Jadvali</a>
+                                                <a href="{% url 'exams' dep year h.id%}" class="btn"
+                                                   style="background-color:#3f477b; color: white;">Nazoratlar
+                                                    jadvali</a>
+                                            </h3>
                                         </div>
                                     </div>
 
@@ -162,7 +187,15 @@
                                     {% for h in i.id|get_group:groups_list %}
                                     <div class="about-text-info1 shadow-lg d-flex">
                                         <div class="ms-4">
-                                            <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                                            <h3 class="mb-0" style="color:#3f477b ">
+                                                {{h.name}}
+                                                <a href="{% url 'schedule' dep year h.id%}" class="btn"
+                                                   style="background-color:#3f477b; color: white;">Dars
+                                                    Jadvali</a>
+                                                <a href="{% url 'exams' dep year h.id%}" class="btn"
+                                                   style="background-color:#3f477b; color: white;">Nazoratlar
+                                                    jadvali</a>
+                                            </h3>
                                         </div>
                                     </div>
 
@@ -190,7 +223,15 @@
                                     {% for h in i.id|get_group:groups_list %}
                                     <div class="about-text-info1 shadow-lg d-flex">
                                         <div class="ms-4">
-                                            <h3><a href="{% url 'schedule' dep year h.id%}">{{h.name}}</a></h3>
+                                            <h3 class="mb-0" style="color:#3f477b ">
+                                                {{h.name}}
+                                                <a href="{% url 'schedule' dep year h.id%}" class="btn"
+                                                   style="background-color:#3f477b; color: white;">Dars
+                                                    Jadvali</a>
+                                                <a href="{% url 'exams' dep year h.id%}" class="btn"
+                                                   style="background-color:#3f477b; color: white;">Nazoratlar
+                                                    jadvali</a>
+                                            </h3>
                                         </div>
                                     </div>
 

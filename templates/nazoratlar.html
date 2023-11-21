@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{%extends 'index.html'%}
+{% load group_filter %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+{%block content%}
+
+<section class="contact-section section-padding" id="section_6">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-16 mx-auto w-100">
+                <a href="javascript:history.go(-4)" class="back-button">
+                    <span class="text">Bosh sahifa/</span>
+                </a>
+                <a href="javascript:history.go(-3)" class="back-button">
+                    <span class="text">Fakultetlar/</span>
+                </a>
+                <a href="javascript:history.back(-2)" class="back-button">
+                    <span class="text">Kurs/</span>
+                </a>
+                <a href="javascript:history.back()" class="back-button">
+                    <span class="text">Guruh/</span>
+                </a>
+                <br>
+                <br>
+                <h2 class="text-center mb-4" style="color: #3f477b;">Nazoratlar jadvali bilan tanishib chiqing!</h2>
+               <div class="tab-content shadow-lg mt-5 " id="nav-tabContent">
+
+                <div class="row item mb-4">
+                    <div class="table-responsive">
+                        <table class="schedule-table table table-light"
+                               style="width: 100%; margin: 0 auto;">
+                            <thead>
+                            <tr>
+                                <th style=" width: 2%;  background-color:#3f477b; color: white;" scope="col">#</th>
+                                <th style=" width: 14%; background-color:#3f477b; color: white;" scope="col">Fan</th>
+                                <th style=" width: 13%; background-color:#3f477b; color: white;" scope="col">Semestr</th>
+                                <th style=" width: 12%; background-color:#3f477b; color: white;" scope="col">Nazorat turi</th>
+                                <th style=" width: 13%; background-color:#3f477b; color: white;" scope="col">O'qituvchi</th>
+                                <th style=" width: 8%;  background-color:#3f477b; color: white;" scope="col">Xona</th>
+                                <th style=" width: 8%;  background-color:#3f477b; color: white;" scope="col">Boshlash</th>
+                                <th style=" width: 8%;  background-color:#3f477b; color: white;" scope="col">Tugash</th>
+                                <th style=" width: 12%; background-color:#3f477b; color: white;" scope="col">Sana</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for key,value in exams.items%}
+                            <tr>
+                                <th style="background-color:#99a0d2; color: white;" scope="row">{{forloop.counter}}</th>
+                                {% for key2,value2 in value.items %}
+                                <th style="color: black;" scope="row">{{ value2}}</th>
+                                {% endfor %}
+                            </tr>
+                            {%endfor%}
+
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+               </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{%endblock content %}
+
+</body>
+
+</html>

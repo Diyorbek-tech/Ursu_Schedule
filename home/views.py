@@ -1,11 +1,11 @@
 from django.shortcuts import render
 import requests
 
-from datetime import datetime
-
+from datetime import datetime, timedelta
 
 # Create your views here.
 from decouple import config
+
 
 def facultiesview(request):
     Faculties = []
@@ -61,12 +61,10 @@ def curriculumview(request, deportment, year):
     response = requests.request("GET", url, headers=headers, data=payload)
     response = response.json()['data']['items']
 
-
     url2 = f"https://student.urdu.uz/rest/v1/data/group-list?limit=500&_department={deportment}"
 
     response2 = requests.request("GET", url2, headers=headers, data=payload)
     response2 = response2.json()['data']['items']
-
 
     context = {
         'year': year,
@@ -108,17 +106,29 @@ def get_daily_schedule(response):
 
 def scheduleview(request, deportment, year, group):
     today = datetime.now()
-    m = today.day - today.weekday()
-    monday = datetime.strptime(str(today.replace(day=m, hour=5, minute=0, microsecond=0, second=0)),
-                               "%Y-%m-%d %H:%M:%S").timestamp()
-    s = m + 5
-    saturday = datetime.strptime(str(today.replace(day=s, hour=5, minute=0, microsecond=0, second=0)),
-                                 "%Y-%m-%d %H:%M:%S").timestamp()
 
-    nextmonday = datetime.strptime(str(today.replace(day=m + 7, hour=5, minute=0, microsecond=0, second=0)),
-                                   "%Y-%m-%d %H:%M:%S").timestamp()
-    nextsaturday = datetime.strptime(str(today.replace(day=s + 7, hour=5, minute=0, microsecond=0, second=0)),
-                                     "%Y-%m-%d %H:%M:%S").timestamp()
+    current_monday = today - timedelta(days=(today.weekday() - 0) % 7)
+
+    current_saturday = today + timedelta(days=(5 - today.weekday() + 7) % 7)
+
+    next_monday = current_monday + timedelta(days=7)
+
+    next_saturday = current_saturday + timedelta(days=7)
+
+    monday = datetime.strptime(
+        str(current_monday.replace(day=current_monday.day, hour=5, minute=0, second=0, microsecond=0)),
+        "%Y-%m-%d %H:%M:%S").timestamp()
+
+    saturday = datetime.strptime(
+        str(current_saturday.replace(day=current_saturday.day, hour=5, minute=0, microsecond=0, second=0)),
+        "%Y-%m-%d %H:%M:%S").timestamp()
+
+    nextmonday = datetime.strptime(
+        str(next_monday.replace(day=next_monday.day, hour=5, minute=0, microsecond=0, second=0)),
+        "%Y-%m-%d %H:%M:%S").timestamp()
+    nextsaturday = datetime.strptime(
+        str(next_saturday.replace(day=next_saturday.day, hour=5, minute=0, microsecond=0, second=0)),
+        "%Y-%m-%d %H:%M:%S").timestamp()
 
     url = f"https://student.urdu.uz/rest/v1/data/schedule-list?_faculty={deportment}&_group={group}&lesson_date_from={monday}&lesson_date_to={saturday}"
     url2 = f"https://student.urdu.uz/rest/v1/data/schedule-list?_faculty={deportment}&_group={group}&lesson_date_from={nextmonday}&lesson_date_to={nextsaturday}"

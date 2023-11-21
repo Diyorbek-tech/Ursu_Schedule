@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import *
+from Nazoratlar.views import *
 
 urlpatterns = [
     path('', homeview, name='home'),
@@ -8,7 +9,5 @@ urlpatterns = [
     path('schedule/<int:parent>/', coursesview, name='kurs'),
     path('schedule/<int:deportment>/<int:year>/', curriculumview, name='curriculum'),
     path('schedule/<int:deportment>/<int:year>/<int:group>/', scheduleview, name='schedule'),
-
-
-    # path('<int:id>/<int:cur>/', coursesview, name='groups'),
+    path('exams/<int:deportment>/<int:year>/<int:group>/', nazoratlarview, name='exams'),
 ]

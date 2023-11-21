@@ -572,9 +572,9 @@ strong {
 
   flex-direction: column;
   justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+
   width: 100%;
-  text-align: center;
+
 
   bottom: 0;
   right: 0;
@@ -690,7 +690,7 @@ strong {
 }
 .table-responsive {
 	filter: drop-shadow(2px 2px 4px #606060);
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
 }
 
 .schedule-table {
@@ -959,6 +959,22 @@ strong {
 /*---------------------------------------
   RESPONSIVE STYLES               
 -----------------------------------------*/
+@media screen and (min-width: 1024px) {
+.table-responsive th{
+ font-size: 16px;
+}
+  .table-responsive td{
+ font-size: 16px;
+}
+}
+@media screen and (min-width: 768px) {
+.table-responsive th{
+ font-size: 14px;
+}
+  .table-responsive td{
+ font-size: 14px;
+}
+}
 @media screen and (max-width: 991px) {
   h1 {
     font-size: 62px;
@@ -1046,7 +1062,17 @@ strong {
   #nav-ContactForm > div >div{
     padding: 0!important;
   }
-#nav-ContactForm > div >div:first-child{
+  #nav-ContactForm > div >div:first-child{
+  margin: 10px 0 10px 0;
+  height: 50px!important;
+}
+  #nav-ContactMap > div{
+    margin-bottom: 0!important;
+  }
+  #nav-ContactMap > div >div{
+    padding: 0!important;
+  }
+  #nav-ContactMap > div >div:first-child{
   margin: 10px 0 10px 0;
   height: 50px!important;
 }
@@ -1073,7 +1099,6 @@ padding: 0;
 }
 #section_6{
   padding: 10px;
-  /*Asadbek*/
 }
 }
 @media screen and (max-width: 651px){
@@ -1083,9 +1108,13 @@ padding: 0;
   #nav-ContactForm > div{
     margin: 0;
   }
+  #nav-ContactMap >div{
+    margin: 0;
+  }
   .container-fluid > div > div{
     padding: 0;
   }
+
 }
 @media screen and (max-width: 563px){
   .table-responsive {
