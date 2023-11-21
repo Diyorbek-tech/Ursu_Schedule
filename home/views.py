@@ -6,23 +6,34 @@ from datetime import datetime, timedelta
 # Create your views here.
 from decouple import config
 
+Faculties = []
+url = f"https://student.urdu.uz/rest/v1/data/department-list/?_structure_type=11"
+payload = {
+}
+headers = {
+    'Authorization': config('API_KEY'),
+    'Content-Type': 'application/json'
+}
+response = requests.request("GET", url, headers=headers, data=payload)
+
+for i in response.json()["data"]["items"]:
+    if i['id'] not in [77, 8, 7, 6]:
+        Faculties.append(i)
+
+
+def get_fac_name(id):
+    for i in Faculties:
+        if i['id'] == id:
+            return i['name']
+
+
+def get_group_name(id):
+    url2 = f"https://student.urdu.uz/rest/v1/data/group-list/?id={id}"
+    group = requests.request("GET", url2, headers=headers, data=payload).json()["data"]["items"]
+    return group[0]['name']
+
 
 def facultiesview(request):
-    Faculties = []
-    url = f"https://student.urdu.uz/rest/v1/data/department-list/?_structure_type=11"
-
-    payload = {
-    }
-    headers = {
-        'Authorization': config('API_KEY'),
-        'Content-Type': 'application/json'
-    }
-    response = requests.request("GET", url, headers=headers, data=payload)
-    # pageCount = response.json()['data']['pagination']['pageCount']
-    for i in response.json()["data"]["items"]:
-        if i['id'] not in [77, 8, 7, 6]:
-            Faculties.append(i)
-
     return render(request, 'Faculties.html', {"flist": reversed(Faculties)})
 
 
@@ -34,17 +45,23 @@ def homeview(request):
 
 
 def coursesview(request, parent):
+    name = get_fac_name(parent)
+
     kurslar = [1, 2, 3, 4, 5]
     if parent == 76:
         kurslar = [1, 2]
     context = {
         'id': parent,
         "kurslar": kurslar,
+        'f_name': name
     }
     return render(request, 'courses.html', context)
 
 
 def curriculumview(request, deportment, year):
+    fname = get_fac_name(deportment)
+    k_name = f"{year}-Kurs"
+
     groups = []
     now = datetime.now()
     ye = now.year - year
@@ -71,6 +88,8 @@ def curriculumview(request, deportment, year):
         'dep': deportment,
         "curriculum_list": response,
         "groups_list": response2,
+        'fname': fname,
+        'k_name': k_name,
 
     }
 
@@ -105,6 +124,10 @@ def get_daily_schedule(response):
 
 
 def scheduleview(request, deportment, year, group):
+    fname = get_fac_name(deportment)
+    k_name = f"{year}-Kurs"
+    getgrname = get_group_name(group)
+
     today = datetime.now()
 
     current_monday = today - timedelta(days=(today.weekday() - 0) % 7)
@@ -147,9 +170,53 @@ def scheduleview(request, deportment, year, group):
     context = {
 
         "schedule_list": get_daily_schedule(response),
-        "schedule_next_list": get_daily_schedule(responsenext)
+        "schedule_next_list": get_daily_schedule(responsenext),
+        'fname': fname,
+        'k_name': k_name,
+        'g_name': getgrname,
     }
 
     return render(request, 'schedule.html', context)
 
+
 #    filterlar    id:   77,8,7,6
+
+
+def nazoratlarview(request, deportment, year, group):
+    fname = get_fac_name(deportment)
+    k_name = f"{year}-Kurs"
+    getgrname = get_group_name(group)
+
+    Exams = {}
+
+    url = f"https://student.urdu.uz/rest/v1/data/exam-list?_faculty={deportment}&_group={group}"
+
+    payload = {
+    }
+    headers = {
+        'Authorization': config('API_KEY'),
+        'Content-Type': 'application/json'
+    }
+    response = requests.request("GET", url, headers=headers, data=payload)
+    count = 0
+    for i in response.json()["data"]["items"]:
+        utc_time = datetime.utcfromtimestamp(float(i["examDate"])).strftime("%Y-%m-%d")
+        Exams[f"{count}"] = {
+            "fan": i["subject"]['name'],
+            "semester": i["semester"]['name'],
+            "type": i["examType"]["name"],
+            "oqituvchi": i["employee"]['name'],
+            "xona": i["auditorium"]['name'],
+            "boshlash": i["lessonPair"]['start_time'],
+            "tugash": i["lessonPair"]['end_time'],
+            "date": str(utc_time),
+        }
+        count += 1
+    context = {
+        'exams': Exams,
+        'fname': fname,
+        'k_name': k_name,
+        'g_name': getgrname,
+    }
+
+    return render(request, 'nazoratlar.html', context)
