@@ -267,7 +267,7 @@ strong {
   transition: all 0.3s;
 }
 
-.nav-tabs .nav-link:first-child {
+.nav-tabs .nav-link {
   margin-right: 15px;
 }
 

@@ -1,3 +1,5 @@
+import json
+
 from django.shortcuts import render
 import requests
 
@@ -179,7 +181,37 @@ def scheduleview(request, deportment, year, group):
     return render(request, 'schedule.html', context)
 
 
-#    filterlar    id:   77,8,7,6
+def get_exams_data(data, type_code):
+    dict_response = {}
+    count = 0
+
+    for i in data:
+
+        utc_time = datetime.utcfromtimestamp(float(i["examDate"])).strftime("%Y-%m-%d")
+        fan = i["subject"]["name"]
+
+        if i["finalExamType"]["code"] == str(type_code) and i["examType"]["code"] == "12":
+            dict_response[str(count)] = {
+                "fan": fan,
+                "date": str(utc_time),
+                "boshlash": i["lessonPair"]["start_time"],
+                "xona": i["auditorium"]["name"],
+                "oqituvchi": i["employee"]["name"],
+            }
+
+            for value in data:
+                fan2 = value["subject"]["name"]
+                if fan2 == fan and value["examType"]["code"] == "13":
+                    utc_time2 = datetime.utcfromtimestamp(float(value["examDate"])).strftime("%Y-%m-%d")
+                    dict_response[str(count)].update({
+                        "date2": str(utc_time2),
+                        "boshlash2": value["lessonPair"]["start_time"],
+                        "xona2": value["auditorium"]["name"],
+                        "oqituvchi2": value["employee"]["name"]
+                    })
+        count += 1
+    print(json.dumps(dict_response))
+    return dict_response
 
 
 def nazoratlarview(request, deportment, year, group):
@@ -187,33 +219,14 @@ def nazoratlarview(request, deportment, year, group):
     k_name = f"{year}-Kurs"
     getgrname = get_group_name(group)
 
-    Exams = {}
+    url1 = f"https://student.urdu.uz/rest/v1/data/exam-list?_faculty={deportment}&_group={group}"
 
-    url = f"https://student.urdu.uz/rest/v1/data/exam-list?_faculty={deportment}&_group={group}"
+    response1 = requests.request("GET", url1, headers=headers, data=payload).json()['data']['items']
 
-    payload = {
-    }
-    headers = {
-        'Authorization': config('API_KEY'),
-        'Content-Type': 'application/json'
-    }
-    response = requests.request("GET", url, headers=headers, data=payload)
-    count = 0
-    for i in response.json()["data"]["items"]:
-        utc_time = datetime.utcfromtimestamp(float(i["examDate"])).strftime("%Y-%m-%d")
-        Exams[f"{count}"] = {
-            "fan": i["subject"]['name'],
-            "semester": i["semester"]['name'],
-            "type": i["examType"]["name"],
-            "oqituvchi": i["employee"]['name'],
-            "xona": i["auditorium"]['name'],
-            "boshlash": i["lessonPair"]['start_time'],
-            "tugash": i["lessonPair"]['end_time'],
-            "date": str(utc_time),
-        }
-        count += 1
     context = {
-        'exams': Exams,
+        'asosiyq': get_exams_data(response1, 11),
+        'ikkinchiq': get_exams_data(response1, 12),
+        'uchunchiq': get_exams_data(response1, 13),
         'fname': fname,
         'k_name': k_name,
         'g_name': getgrname,
