@@ -975,7 +975,15 @@ strong {
  font-size: 14px;
 }
 }
+@media screen and (min-width: 992px){
+  .shouldbottom{
+    margin-top: 140px!important;
+  }
+}
 @media screen and (max-width: 991px) {
+  .shouldbottom{
+    margin-top: -25px!important;
+  }
   h1 {
     font-size: 62px;
   }
@@ -1048,6 +1056,12 @@ strong {
 }
 
 @media screen and (max-width: 767px) {
+  .shouldtop{
+    margin-top: -85px !important;
+  }
+  .shouldbottom{
+    margin-top: -25px!important;
+  }
   .custom-btn {
     font-size: 14px;
     padding: 10px 20px;
@@ -1086,11 +1100,11 @@ div.row.item.mb-4{
  h5{
   font-size: 18px!important;
 }
-.text-center{
-  margin-bottom: 0.75rem!important;
-  margin-top: 0.75rem!important;
-  font-size: 24px;
-}
+/*.text-center{*/
+/*  margin-bottom: 0.75rem!important;*/
+/*  margin-top: 0.75rem!important;*/
+/*  font-size: 24px;*/
+/*}*/
 .tab-content{
   margin-top: 10px!important;
 }
