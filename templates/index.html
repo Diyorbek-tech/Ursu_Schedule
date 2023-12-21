@@ -25,6 +25,7 @@
     <link href="{% static 'css/bootstrap-icons.css'%}" rel="stylesheet">
 
     <link href="{% static 'css/templatemo-festava-live.css'%}" rel="stylesheet">
+    <script src="{% static 'js/snowfall.js '%}"></script>
 
     <!--
 
@@ -79,6 +80,24 @@
                         ;  // add zero in front of numbers < 10
                         return i;
                     }
+
+                    let snowfall = new Snowfall({
+                        // number of snowflakes
+                        count: 100,
+                        // min/max size
+                        minRadius: 10,
+                        maxRadius: 30,
+                        // min/max speed
+                        minSpeed: 3,
+                        maxSpeed: 10,
+                        // custom symbol or text for snowflakes
+                        text: "\u2744",
+                        // color of snowflakes
+                        color: "#ffffff",
+                        // z-index for the canvas
+                        zIndex: "1000"
+                    });
+
                 </script>
 
                 <div class="col-12 mt-auto mb-5 text-center shouldtop">
@@ -91,47 +110,46 @@
                 </div>
 
 
-
                 <div class="mt-auto text-center">
                     <div class="col-lg-12 col-12 mt-auto  d-flex flex-column flex-lg-row text-center shouldbottom">
 
-                    <div class="date-wrap">
-                        <h6 class="text-white">
-                            <i class="custom-icon bi-calendar me-2"></i>
-                            {{date}}
-                        </h6>
+                        <div class="date-wrap">
+                            <h6 class="text-white">
+                                <i class="custom-icon bi-calendar me-2"></i>
+                                {{date}}
+                            </h6>
+                        </div>
+                        <div class="location-wrap mx-auto py-3 py-lg-0">
+                            <h6 class="text-white">
+                                <i class="custom-icon bi-geo-alt me-2"></i>
+                                Hamid Olimjon ko‘chasi, 14-uy, Urganch Shahar
+                            </h6>
+                        </div>
+                        <div class="social-share">
+                            <ul class="social-icon d-flex align-items-center justify-content-center">
+                                <span class="text-white me-3">Aloqa:</span>
+
+                                <li class="social-icon-item">
+                                    <a href="https://www.facebook.com/urduuz" class="social-icon-link">
+                                        <span class="bi-facebook"></span>
+                                    </a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="https://t.me/URDU_PRESSA" class="social-icon-link">
+                                        <span class="bi-telegram"></span>
+                                    </a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="https://www.instagram.com/urdumatbuotxizmati/" class="social-icon-link">
+                                        <span class="bi-instagram"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
-                    <div class="location-wrap mx-auto py-3 py-lg-0">
-                        <h6 class="text-white">
-                            <i class="custom-icon bi-geo-alt me-2"></i>
-                            Hamid Olimjon ko‘chasi, 14-uy, Urganch Shahar
-                        </h6>
-                    </div>
-                    <div class="social-share">
-                        <ul class="social-icon d-flex align-items-center justify-content-center">
-                            <span class="text-white me-3">Aloqa:</span>
-
-                            <li class="social-icon-item">
-                                <a href="https://www.facebook.com/urduuz" class="social-icon-link">
-                                    <span class="bi-facebook"></span>
-                                </a>
-                            </li>
-
-                            <li class="social-icon-item">
-                                <a href="https://t.me/URDU_PRESSA" class="social-icon-link">
-                                    <span class="bi-telegram"></span>
-                                </a>
-                            </li>
-
-                            <li class="social-icon-item">
-                                <a href="https://www.instagram.com/urdumatbuotxizmati/" class="social-icon-link">
-                                    <span class="bi-instagram"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
                     <div class="date-wrap">
                         <p class="text-white" style="font-size: 15px">
                             <b>©</b> Talimni kredit tizimini boshqarish va ma'lumotlar bazasini monitoring qilish
@@ -148,11 +166,12 @@
 
         <div class="video-wrap">
             <video autoplay="" loop="" muted="" class="custom-video" poster="#">
-                <source src="{% static 'video/Dron.mp4'%}" type="video/mp4">
+                <source src="{% static 'video/Dron2.mp4'%}" type="video/mp4">
 
                 Your browser does not support the video tag.
             </video>
         </div>
+
     </section>
 
     {%endblock content%}
