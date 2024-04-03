@@ -99,30 +99,43 @@ def curriculumview(request, deportment, year):
 
 
 def get_daily_schedule(response):
+    global lesson_date
     schedule_list = []
-    date_list = []
 
-    lesson_day_by = []
-    datetime_obj = ""
+    dates = [i['lesson_date'] for i in response]
+    dates = set(dates)
+    dates = list(dates)
+    dates.sort()
     try:
-
-        lesson_date = response[0]['lesson_date']
+        for day in dates:
+            todays_lesson = [i for i in response if i['lesson_date'] == day]
+            todays_lesson.sort(key=lambda i: i['lessonPair']['code'])
+            schedule_list.append(todays_lesson)
+        return schedule_list
     except Exception as e:
-        print(str(e))
-    for i in response:
-        datetime_obj = datetime.fromtimestamp(i['lesson_date']).strftime('%Y-%m-%d')
-        if i['lesson_date'] != lesson_date:
-            schedule_list.append(lesson_day_by.copy())
-            lesson_day_by.clear()
-            date_list.append(datetime_obj)
-        lesson_day_by.append(i)
+        return []
+    # try:
+    #
+    #     lesson_date = response[0]['lesson_date']
+    # except Exception as e:
+    #     print(str(e))
+    # for i in response:
+    #     datetime_obj = datetime.fromtimestamp(i['lesson_date']).strftime('%Y-%m-%d')
+    #     todays_lesson = [i for j in i]
+    #     if i['lesson_date'] != lesson_date:
+    #         schedule_list.append(lesson_day_by.copy())
+    #         lesson_day_by.clear()
+    #         date_list.append(datetime_obj)
+    #     lesson_day_by.append(i)
+    #
+    #     lesson_date = i['lesson_date']
+    #     print(lesson_day_by)
+    # else:
+    #     schedule_list.append(lesson_day_by.copy())
+    #     date_list.append(datetime_obj)
+    #     print(schedule_list)
 
-        lesson_date = i['lesson_date']
-    else:
-        schedule_list.append(lesson_day_by.copy())
-        date_list.append(datetime_obj)
-
-    return schedule_list
+    # return schedule_list
 
 
 def scheduleview(request, deportment, year, group):
