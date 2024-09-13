@@ -16,6 +16,7 @@
         <div class="row">
 
             <div class="col-lg-8 col-16 mx-auto w-100">
+                {%if not mobile%}
                 <a href="javascript:history.go(-4)" class="back-button">
                     <span class="text">Bosh sahifa/</span>
                 </a>
@@ -29,6 +30,7 @@
                     <span class="text">{{g_name}}/</span>
                 </a>
                 <br>
+                {%endif %}
                 <br>
 
                 <h2 class="text-center mb-4" style="color: #3f477b;">{{g_name}} | Dars jadvali</h2>

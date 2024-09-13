@@ -8,5 +8,6 @@ urlpatterns = [
     path('schedule/<int:parent>/', coursesview, name='kurs'),
     path('schedule/<int:deportment>/<int:year>/', curriculumview, name='curriculum'),
     path('schedule/<int:deportment>/<int:year>/<int:group>/', scheduleview, name='schedule'),
+    path('schedule_m/<int:st_id>/', schedule_mobile_view, name='schedule_mobile'),
     path('exams/<int:deportment>/<int:year>/<int:group>/', nazoratlarview, name='exams'),
 ]

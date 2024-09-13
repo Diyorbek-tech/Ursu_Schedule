@@ -8,6 +8,8 @@ from datetime import datetime, timedelta
 # Create your views here.
 from decouple import config
 
+from models_db.models import *
+
 Faculties = []
 url = f"https://student.urdu.uz/rest/v1/data/department-list/?_structure_type=11"
 payload = {
@@ -194,32 +196,85 @@ def scheduleview(request, deportment, year, group):
     return render(request, 'schedule.html', context)
 
 
+def schedule_mobile_view(request, st_id):
+    student_obj = EStudentMeta.objects.using('hemis').get(field_student_id=st_id, active=True, field_student_status='11')
+    department = student_obj.field_department.id
+    group = student_obj.field_group.id
+
+    today = datetime.now()
+
+    current_monday = today - timedelta(days=(today.weekday() - 0) % 7)
+
+    current_saturday = today + timedelta(days=(5 - today.weekday() + 7) % 7)
+
+    next_monday = current_monday + timedelta(days=7)
+
+    next_saturday = current_saturday + timedelta(days=7)
+
+    monday = datetime.strptime(
+        str(current_monday.replace(day=current_monday.day, hour=5, minute=0, second=0, microsecond=0)),
+        "%Y-%m-%d %H:%M:%S").timestamp()
+
+    saturday = datetime.strptime(
+        str(current_saturday.replace(day=current_saturday.day, hour=5, minute=0, microsecond=0, second=0)),
+        "%Y-%m-%d %H:%M:%S").timestamp()
+
+    nextmonday = datetime.strptime(
+        str(next_monday.replace(day=next_monday.day, hour=5, minute=0, microsecond=0, second=0)),
+        "%Y-%m-%d %H:%M:%S").timestamp()
+    nextsaturday = datetime.strptime(
+        str(next_saturday.replace(day=next_saturday.day, hour=5, minute=0, microsecond=0, second=0)),
+        "%Y-%m-%d %H:%M:%S").timestamp()
+
+    url = f"https://student.urdu.uz/rest/v1/data/schedule-list?_faculty={department}&_group={group}&lesson_date_from={monday}&lesson_date_to={saturday}"
+    url2 = f"https://student.urdu.uz/rest/v1/data/schedule-list?_faculty={department}&_group={group}&lesson_date_from={nextmonday}&lesson_date_to={nextsaturday}"
+    payload = {
+    }
+    headers = {
+        'Authorization': config('API_KEY'),
+        'Content-Type': 'application/json'
+    }
+    response = requests.request("GET", url, headers=headers, data=payload)
+    responsenext = requests.request("GET", url2, headers=headers, data=payload)
+
+    response = response.json()['data']['items']
+    responsenext = responsenext.json()['data']['items']
+
+    context = {
+
+        "schedule_list": get_daily_schedule(response),
+        "schedule_next_list": get_daily_schedule(responsenext),
+        'mobile': True,
+        'g_name': student_obj.field_group.name
+    }
+
+    return render(request, 'schedule.html', context)
+
+
 def get_exams_data(data, type_code):
     dict_response = {}
     count = 0
 
     for i in data:
 
-        utc_time = datetime.utcfromtimestamp(float(i["examDate"])).strftime("%Y-%m-%d")
+        utc_time = datetime.utcfromtimestamp(float(i["start_at"])).strftime("%Y-%m-%d")
         fan = i["subject"]["name"]
 
-        if i["finalExamType"]["code"] == str(type_code) and i["examType"]["code"] == "12":
+        if i["examType"]["code"] == "13":
             dict_response[str(count)] = {
                 "fan": fan,
                 "date": str(utc_time),
-                "boshlash": i["lessonPair"]["start_time"],
-                "xona": i["auditorium"]["name"],
+                "boshlash": datetime.utcfromtimestamp(float(i["start_at"])).strftime("%H:%M"),
                 "oqituvchi": i["employee"]["name"],
             }
 
             for value in data:
                 fan2 = value["subject"]["name"]
                 if fan2 == fan and value["examType"]["code"] == "13":
-                    utc_time2 = datetime.utcfromtimestamp(float(value["examDate"])).strftime("%Y-%m-%d")
+                    utc_time2 = datetime.utcfromtimestamp(float(value["start_at"])).strftime("%Y-%m-%d")
                     dict_response[str(count)].update({
                         "date2": str(utc_time2),
-                        "boshlash2": value["lessonPair"]["start_time"],
-                        "xona2": value["auditorium"]["name"],
+                        "boshlash2": datetime.utcfromtimestamp(float(i["start_at"])).strftime("%H:%M"),
                         "oqituvchi2": value["employee"]["name"]
                     })
         count += 1
